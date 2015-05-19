@@ -1,0 +1,3 @@
+Hier findet ihr eine kurze Anleitung für einfache Beispiele der Mockito-Methoden when().thenReturn(), verify() und spy():
+In meinem Beispiel Projekt findet ihr 
+When().thenReturn():
