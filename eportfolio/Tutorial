@@ -2,6 +2,66 @@ Hier findet ihr eine kurze Anleitung für einfache Beispiele der Mockito-Methode
 In meinem Beispiel-Projekt findet ihr ein Interface mit dem Namen "Addierer", das nur die int-Methode "add(int x, int y)" enthält.
 Außerdem findet ihr in diesem Projekt die Klasse "Service", die Getter und Setter für Addierer implementiert 
 und die Methode addTwoNumbers(int x, int y), die die Methode add(int x, int y) aus dem Interface "Addierer" zurückgibt.
-Die Test-Methode "ServiceTest" ist bisher leer und eure Aufgabe ist es nun, diese zu befüllen.
+Die Test-Methode "ServiceTest" ist bisher leer und eure Aufgabe ist es nun, 
+diese zu befüllen und zwar mit den Beispielen für die drei wichtigsten Mockito-Methoden:
+	
+	1. when().thenReturn():
+	
+	Da "when().thenReturn()" bei Mockitotests immer benötigt wird, kann man diese Methode schon mit @Before implementieren:
+	
+	Service service;
+	
+	@Before
+	public void setup(){
+		Addierer addierer = mock(Addierer.class);
+		when(addierer.add(3, 3)).thenReturn(6);
+		service =new Service();
+		service.setAddierer(addierer);
+	}
 
-When().thenReturn():
+  Danach muss nur noch ein Test für die Methode "addTwoNumbers()" geschrieben werden:
+  
+	@Test
+	public void testAddTwoNumbers(){
+		Assert.assertEquals(6, service.addTwoNumbers(3,3));
+	}
+	
+  2. verify():
+  
+  Mit "verify()" können zum Beispiel die Anzahl der Aufrufe einer Funktion geprüft werden. 
+  Hierfür gibt man die erwartete Anzahl und der Test überprüft dann, ob diese mit der tatsächlichen Anzahl überein stimmt:
+	
+	@Test
+	public void testVerify()  {
+		Addierer addierer = mock(Addierer.class);
+		when(addierer.add(3, 3)).thenReturn(6);
+		service =new Service();
+		service.getAddierer();
+		
+		verify(addierer, times(1));
+	}
+	
+	3. spy():
+	
+	"spy()" kopiert die Daten eines echten Objekts und verwendet diese für den Test, 
+	ohne, dass das echte Objekt beschädigt werden kann.
+	Bei unserem Beispiel müssen wir ein wenig schummeln und ein Mock-Objekt erzeugen, das der spy()-Methode als echtes Objekt 
+	mitgegeben wird:
+	
+	@Test
+	public void testSpy() {
+		Addierer addierer = mock(Addierer.class);
+		when(addierer.add(3, 3)).thenReturn(6);
+		service =new Service();
+		service.setAddierer(addierer);
+		
+		Service serviceSpy = spy(service);
+		
+		Assert.assertEquals(6, serviceSpy.addTwoNumbers(3, 3));
+	}
+	
+	Nun habt ihr in drei kleinen Beispielen die wichtigsten Funktionen/Methoden von Mockito kennengelernt.
+
+
+
+
