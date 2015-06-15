@@ -1,5 +1,14 @@
-Hier findet ihr eine kurze Anleitung für einfache Beispiele der Mockito-Methoden "when().thenReturn()", "verify()" und "spy()":
-In meinem Beispiel-Projekt findet ihr ein Interface mit dem Namen "Addierer", das nur die int-Methode "add(int x, int y)" enthält.
+Hier findet ihr eine kurze Anleitung zur Installation von Mockito und für einfache Beispiele der Mockito-Methoden 
+"when().thenReturn()", "verify()" und "spy()":
+
+1. Installation
+
+Zur Installation einfach den Anweisungen auf dieser Seite folgen: http://mockito.org/
+
+2. Beispiel
+
+In meinem Beispiel-Projekt findet ihr ein Interface mit dem Namen "Addierer",
+das nur die int-Methode "add(int x, int y)" enthält.
 Außerdem findet ihr in diesem Projekt die Klasse "Service", die Getter und Setter für Addierer implementiert 
 und die Methode addTwoNumbers(int x, int y), die die Methode add(int x, int y) aus dem Interface "Addierer" zurückgibt.
 Die Test-Methode "ServiceTest" ist bisher leer und eure Aufgabe ist es nun, 
